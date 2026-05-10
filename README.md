@@ -44,16 +44,12 @@ The ESP32 measures:
 - Channel 1 (V): voltage across the DUT
 - Channel 2 (I): voltage across the series resistor
 
-Current is obtained from:
-
-\[
-I = \frac{V_R}{R}
-\]
+Current is obtained from:  I = Vr/R
 
 Where:
 
-- \(V_R\) = voltage across the series resistor
-- \(R\) = 330 ohm
+- Vr = voltage across the series resistor
+- R = 330 ohm
 
 ---
 
