@@ -1,4 +1,4 @@
-# vi_analyzer_ESP32
+# V/I analyzer
 
 Simple V/I curve analyzer based on ESP32 and SSD1306 OLED display.
 
