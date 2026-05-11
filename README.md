@@ -1,12 +1,13 @@
 # V/I analyzer
 
 Simple V/I curve analyzer based on ESP32 and SSD1306 OLED display.
+Note: There is also an arduino mega version refered at the end of this document.
 
 ![screenshot_placeholder](images/vi_analyzer_overview.jpg)
 
----
 
-# Description
+
+## Description
 
 This project implements a very simple V/I (Voltage / Current) curve analyzer using an ESP32, an OLED display and an external function generator.
 
@@ -24,9 +25,9 @@ The generated X/Y graph represents:
 - X axis → Voltage (V)
 - Y axis → Current (I)
 
----
 
-# Basic Operating Principle
+
+## Basic Operating Principle
 
 The test circuit is:
 
@@ -51,9 +52,9 @@ Where:
 - Vr = voltage across the series resistor
 - R = 330 ohm
 
----
 
-# Expected Curves
+
+## Expected Curves
 
 Different electronic components generate characteristic V/I patterns.
 
@@ -73,9 +74,9 @@ Some expected examples are:
 
 ![alt text](images/VI_graphs.png)
 
----
 
-# Signal Source
+
+## Signal Source
 
 An external function generator is required.
 
@@ -91,13 +92,13 @@ Important:
 
 The function generator ground MUST NOT be directly shared with the internal signal conditioning stages unless the complete circuit grounding scheme is properly understood.
 
----
 
-# System Architecture
+
+## System Architecture
 
 The system consists of two main parts:
 
-## 1. Analog Signal Conditioning
+### 1. Analog Signal Conditioning
 
 The ESP32 ADC only accepts positive voltages between:
 
@@ -116,9 +117,9 @@ The conditioning circuit converts bipolar signals into safe unipolar ADC-compati
 ![screenshot_placeholder](hardware/VI_analyzer_sch.png)
 [Falstad simulation](https://tinyurl.com/26ee2g3c)
 
----
 
-## 2. ESP32 + OLED Display
+
+### 2. ESP32 + OLED Display
 
 The ESP32 performs:
 
@@ -133,9 +134,9 @@ The OLED display shows:
 - voltage scale per division
 - current scale per division
 
----
 
-# OLED Display
+
+## OLED Display
 
 Display used:
 
@@ -148,11 +149,11 @@ The graph occupies the left side of the screen.
 
 The right side displays measurement information.
 
----
 
-# ESP32 Connections
 
-## OLED Connections
+## ESP32 Connections
+
+### OLED Connections
 
 | OLED Pin | ESP32 Pin |
 |---|---|
@@ -161,9 +162,9 @@ The right side displays measurement information.
 | SDA | GPIO21 |
 | SCL | GPIO22 |
 
----
 
-## Analog Inputs
+
+### Analog Inputs
 
 | Function | ESP32 Pin |
 |---|---|
@@ -172,9 +173,9 @@ The right side displays measurement information.
 
 ADC1 pins are intentionally used because they behave better on ESP32 systems.
 
----
 
-# Display Information
+
+## Display Information
 
 The OLED shows:
 
@@ -188,9 +189,9 @@ The graph includes:
 - center axes
 - division marks
 
----
 
-# Software Features
+
+## Software Features
 
 Current firmware features:
 
@@ -201,9 +202,9 @@ Current firmware features:
 - graphical grid
 - OLED information area
 
----
 
-# Hardware Notes
+
+## Hardware Notes
 
 Important:
 
@@ -211,9 +212,9 @@ Important:
 - External protection circuitry is mandatory
 - Analog conditioning is required before ADC connection
 
----
 
-# Future Improvements
+
+## Future Improvements
 
 Possible future improvements include:
 
@@ -228,3 +229,24 @@ Possible future improvements include:
 - waveform persistence
 - USB serial data export
 
+---
+# Arduino Mega Version
+
+The repository also includes an alternative implementation for Arduino Mega:
+
+```text
+vi_analyzer_arduino
+```
+
+This version was adapted to work with a 3.6" TFT shield based on the ILI9327 controller using parallel communication.
+
+![screenshot_placeholder](images/vi_arduino.jpg)
+
+Although the larger color display provides a more instrument-like appearance, the overall performance is significantly limited by:
+- the Arduino Mega processing power,
+- the relatively slow TFT refresh,
+- the cost of repeatedly drawing the V/I curve.
+
+As a result, noticeable screen flickering and limited refresh rates are present during operation.
+
+For this reason, the ESP32 implementation is currently considered the preferred version of the project, despite using a much smaller monochrome OLED display.
