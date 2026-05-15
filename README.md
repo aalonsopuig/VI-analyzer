@@ -115,7 +115,7 @@ Therefore, the input signals are conditioned externally:
 The conditioning circuit converts bipolar signals into safe unipolar ADC-compatible signals.
 
 ![screenshot_placeholder](hardware/VI_analyzer_sch.png)
-[Falstad simulation](https://tinyurl.com/26ee2g3c)
+[Falstad simulation](https://is.gd/OAPqy9)
 
 
 
